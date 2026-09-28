@@ -11,16 +11,13 @@ import app.schemas.parametro_medido_schema as schemas
 app = APIRouter()
 
 
-@app.get("/list", dependencies=[Depends(decode_token)])
+@app.get("/list")
 def list_parametros(db: Session = Depends(get_db)):
     return crud.get_parametros(db=db)
 
 
 @app.get(
-    "/{parametro_id}",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.ParametroMedidoResponse
-)
+    "/{parametro_id}", response_model=schemas.ParametroMedidoResponse)
 def get_parametro(
     parametro_id: int,
     db: Session = Depends(get_db)
@@ -41,10 +38,7 @@ def get_parametro(
 
 
 @app.post(
-    "/create",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.ParametroMedidoResponse
-)
+    "/create", response_model=schemas.ParametroMedidoResponse)
 def create_parametro(
     parametro: schemas.ParametroMedidoCreate,
     db: Session = Depends(get_db)
@@ -56,10 +50,7 @@ def create_parametro(
 
 
 @app.put(
-    "/update/{parametro_id}",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.ParametroMedidoResponse
-)
+    "/update/{parametro_id}", response_model=schemas.ParametroMedidoResponse)
 def update_parametro(
     parametro_id: int,
     parametro: schemas.ParametroMedidoUpdate,

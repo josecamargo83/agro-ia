@@ -11,16 +11,13 @@ import app.schemas.tipo_sensor_schema as schemas
 app = APIRouter()
 
 
-@app.get("/list", dependencies=[Depends(decode_token)])
+@app.get("/list")
 def list_tipos_sensor(db: Session = Depends(get_db)):
     return crud.get_tipos_sensor(db=db)
 
 
 @app.get(
-    "/{tipo_sensor_id}",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.TipoSensorResponse
-)
+    "/{tipo_sensor_id}", response_model=schemas.TipoSensorResponse)
 def get_tipo_sensor(
     tipo_sensor_id: int,
     db: Session = Depends(get_db)
@@ -41,10 +38,7 @@ def get_tipo_sensor(
 
 
 @app.post(
-    "/create",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.TipoSensorResponse
-)
+    "/create", response_model=schemas.TipoSensorResponse)
 def create_tipo_sensor(
     tipo_sensor: schemas.TipoSensorCreate,
     db: Session = Depends(get_db)
@@ -56,10 +50,7 @@ def create_tipo_sensor(
 
 
 @app.put(
-    "/update/{tipo_sensor_id}",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.TipoSensorResponse
-)
+    "/update/{tipo_sensor_id}", response_model=schemas.TipoSensorResponse)
 def update_tipo_sensor(
     tipo_sensor_id: int,
     tipo_sensor: schemas.TipoSensorUpdate,

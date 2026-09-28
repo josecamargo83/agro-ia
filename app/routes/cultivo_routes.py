@@ -11,7 +11,7 @@ import app.schemas.cultivo_schema as schemas
 app = APIRouter()
 
 
-@app.get("/list", dependencies=[Depends(decode_token)])
+@app.get("/list")
 def list_cultivos(db: Session = Depends(get_db)):
     return crud.get_cultivos(db=db)
 
@@ -41,10 +41,7 @@ def get_cultivo(
 
 
 @app.post(
-    "/create",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.CultivoResponse
-)
+    "/create", response_model=schemas.CultivoResponse)
 def create_cultivo(
     cultivo: schemas.CultivoCreate,
     db: Session = Depends(get_db)
@@ -56,10 +53,7 @@ def create_cultivo(
 
 
 @app.put(
-    "/update/{cultivo_id}",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.CultivoResponse
-)
+    "/update/{cultivo_id}", response_model=schemas.CultivoResponse)
 def update_cultivo(
     cultivo_id: int,
     cultivo: schemas.CultivoUpdate,

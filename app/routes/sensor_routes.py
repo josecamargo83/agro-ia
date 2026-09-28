@@ -11,16 +11,13 @@ import app.schemas.sensor_schema as schemas
 app = APIRouter()
 
 
-@app.get("/list", dependencies=[Depends(decode_token)])
+@app.get("/list")
 def list_sensores(db: Session = Depends(get_db)):
     return crud.get_sensores(db=db)
 
 
 @app.get(
-    "/{sensor_id}",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.SensorResponse
-)
+    "/{sensor_id}", response_model=schemas.SensorResponse)
 def get_sensor(
     sensor_id: int,
     db: Session = Depends(get_db)
@@ -41,10 +38,7 @@ def get_sensor(
 
 
 @app.post(
-    "/create",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.SensorResponse
-)
+    "/create", response_model=schemas.SensorResponse)
 def create_sensor(
     sensor: schemas.SensorCreate,
     db: Session = Depends(get_db)
@@ -56,10 +50,7 @@ def create_sensor(
 
 
 @app.put(
-    "/update/{sensor_id}",
-    dependencies=[Depends(decode_token)],
-    response_model=schemas.SensorResponse
-)
+    "/update/{sensor_id}", response_model=schemas.SensorResponse)
 def update_sensor(
     sensor_id: int,
     sensor: schemas.SensorUpdate,

@@ -11,14 +11,14 @@ import app.schemas.tipo_suelo_schema as schemas
 app = APIRouter()
 
 
-@app.get("/list", dependencies=[Depends(decode_token)])
+@app.get("/list")
 def list_tipos_suelo(db: Session = Depends(get_db)):
     return crud.get_tipos_suelo(db=db)
 
 
 @app.get(
     "/{tipo_suelo_id}",
-    dependencies=[Depends(decode_token)],
+    
     response_model=schemas.TipoSueloResponse
 )
 def get_tipo_suelo(
@@ -42,7 +42,7 @@ def get_tipo_suelo(
 
 @app.post(
     "/create",
-    dependencies=[Depends(decode_token)],
+    
     response_model=schemas.TipoSueloResponse
 )
 def create_tipo_suelo(
@@ -57,7 +57,7 @@ def create_tipo_suelo(
 
 @app.put(
     "/update/{tipo_suelo_id}",
-    dependencies=[Depends(decode_token)],
+    
     response_model=schemas.TipoSueloResponse
 )
 def update_tipo_suelo(
