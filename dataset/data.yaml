@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['suelo_humedo', 'suelo_seco']
+
+roboflow:
+  workspace: thair-constante
+  project: agroia-soil-moisture
+  version: 1
+  license: Private
+  url: https://app.roboflow.com/thair-constante/agroia-soil-moisture/1
